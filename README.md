@@ -10,15 +10,13 @@ Lane change implementation through pure pursuit, stanley and Lateral Lane Changi
  
  ![image](https://user-images.githubusercontent.com/57298558/229783509-a612baf7-957e-4bbb-afac-8019e6df153a.png)
 
-![image](https://user-images.githubusercontent.com/57298558/229783465-645724e9-3af1-4a11-a9f5-8cb8f8fcda3f.png)
-
-![image](https://user-images.githubusercontent.com/57298558/229783521-2babfaf8-f3da-45ef-93f1-ee0e789ac1f2.png)
-
 Figure 1: Lane Change Course
  
 **Geometric Bicycle Model**
 	The bicycle model is a typical approximation of an Ackerman steered vehicle used for geometric route tracking. By merging the two front wheels and the two rear wheels to make a two-wheeled vehicle, the bicycle model simplifies the four-wheeled car. The vehicle can only move on a plane, according to the second simplification. As a result of these simplifications, the front wheel steering angle and the curve that the rear axle will follow have a straightforward geometric connection. This basic geometric connection may be stated as seen in Figure 2.
  
+ ![image](https://user-images.githubusercontent.com/57298558/229783648-83e54767-9468-4ea7-a15b-a9bce47b5fd6.png)
+
 Figure 2: Bicycle Vehicle Model
  
 tan(δ) = L/R		…… (1)
@@ -30,8 +28,13 @@ where ‘δ’ is the steering angle of the front wheel, L is the distance betwe
 	The curvature of a circular arc from the rear axle position to a target point on the path ahead of the vehicle is calculated geometrically using the PURE PURSUIT technique. A look ahead distance is used to quantify inaccuracy ahead of the vehicle in this approach. The look-ahead distance ld from the present rear axle location to the intended path is used to establish the target point. In Figures 3a-b, the target point is depicted by a red dot. Only the target point location and the angle between the vehicle's heading vector and look-ahead vector may be used to estimate the vehicle's steering angle.
  
  
+![image](https://user-images.githubusercontent.com/57298558/229783717-6d093af8-487b-45ef-9f3a-37381544afde.png)
 
-Figure 3a	Figure 3b
+Figure 3a
+
+![image](https://user-images.githubusercontent.com/57298558/229783784-4e8d5522-aa8b-4fb3-83c6-88ad53332133.png)
+
+Figure 3b
 
 Applying the law of sines to Figure 4 results
 ld/(Sin(2α))=R/(Sin(π/2-α))	ld/(Sin(α)Cos(α))=R/(Cos(α))
@@ -54,14 +57,22 @@ Equation (4) shows that pure pursuit is a proportional steering angle controller
 
 **Results**
 	**Tracking of Lane Change Course **
+	
+![image](https://user-images.githubusercontent.com/57298558/229784022-09295b31-67f7-402b-a87c-f4c4b56f26da.png)
+
  Figure 4(a): Tracking for all Kdd values on Vx=5m/s
  
+ ![image](https://user-images.githubusercontent.com/57298558/229784165-02303c5e-fb3c-4a9d-afad-594a0d61cd5b.png)
+
 Figure 4(b): Tracking for all Kdd values on Vx=10m/s
 
 On the Lane Change Course, 24 (For four Vx, six Kdd values) experiments are carried out. The impact of the tuning parameter on tracking performance is shown in Figure 5. The look-ahead distance grows as gain 'k' increases, and the tracking becomes less oscillatory. A shorter look-ahead distance allows for more precise tracking, whereas a larger distance allows for smoother tracking. A k value that is too little will create instability, whereas a k value that is too big will result in poor tracking. Another feature of Pure Pursuit is that if you maintain a sufficient look-ahead distance, you'll be able to "clip corners" when completing route turns. With Pure Pursuit, balancing the trade-off between stability and tracking performance is tough and will become course dependant. This is partly owing to the Pure Pursuit method's disregard for the path's curvature. Intuition would lead one to conclude that the path's curvature should affect both the look-ahead distance and the velocity (and perhaps even the current local cross track error).
 
 	**Cross Track Error Plots**
        
+![image](https://user-images.githubusercontent.com/57298558/229784374-a9873d8f-5d02-4122-9119-d23eb7f7f72d.png)
+![image](https://user-images.githubusercontent.com/57298558/229784434-014d5c69-670a-4e4d-ad0d-b9fa472aeeec.png)
+
 Figure 5 :
 (a) velocity at 5 m/s;
 (b) velocity at 10 m/s;
@@ -78,6 +89,7 @@ Figure 5 :
 					θe = θ - θp
 where θ is the heading of the vehicle and θp is the heading of the path at (cx, cy). When cross track error is non-zero, the second term adjusts steering angle ‘δ’ such that the intended trajectory intersects the path tangent from (cx, cy) at kddVx(t) units from the front axle.
  	
+![image](https://user-images.githubusercontent.com/57298558/229784554-834b9c54-f868-4781-9260-3438b5c51625.png)
 
 Figure 6: Stanley Method Geometry 
 	An intuitive steering law is defined as under to: -
@@ -105,10 +117,14 @@ tan-1((ke(t))/(vf(t))) ≈ π/2		,	π/2 ≈ ψ(t) +  π/2
 **Results**
 	**Tracking of Lane Change Course **
  
+ ![image](https://user-images.githubusercontent.com/57298558/229784765-b9992c61-0172-45e9-a8a3-2dab4018202d.png)
+
 Figure 7: Tracking for all K values on Vx=5m/s
  
 	**Cross Track Error Plots**
-       
+![image](https://user-images.githubusercontent.com/57298558/229784886-d1259331-359a-4c19-bf7e-9da8382aa754.png)
+![image](https://user-images.githubusercontent.com/57298558/229784960-8d6d8df5-eaa7-4b4f-8112-f595fe0db94a.png)
+
 Figure 8 :
 (a) velocity at 5 m/s;	(b) velocity at 10 m/s;
 (c) velocity at 15 m/s;	(d) velocity at 20 m/s
@@ -123,7 +139,8 @@ Figure 8 :
 	Controller Design.	The plant used for controller design is linear and derived from the "bicycle" model state-space.
 
 **Results**
- 
+ ![image](https://user-images.githubusercontent.com/57298558/229785036-ed5bcf1e-83a0-4354-ac5f-c5051ae3690e.png)
+
 
 **Summary**
 	By inspecting the data, it's clear that raising the speed causes the zeros and poles on the complex plane to shift towards the imaginary axis. They're all type-2 systems, which means they're "structurally" unstable. This is clear since a system with zero steering angle as input would never get the lateral error (also known as lateral offset) to zero or maintain it constant.
