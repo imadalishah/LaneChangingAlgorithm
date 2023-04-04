@@ -8,6 +8,12 @@ Lane change implementation through pure pursuit, stanley and Lateral Lane Changi
 **Problem/ Objective**
 	Implement Pure Pursuit and Stanley Geometric Controllers for the Lane Change Course in MATLAB and simulate their behaviour in order to have a better knowledge of the steering and control models for wheeled mobile robots (WMR). A single lane change manoeuvre is required to demonstrate the vehicle's tracking capacity on a straight road as well as its response to a rapid, yet (position and curvature) continuous, transient segment. Path tracking is done using  constant speeds of 5 m/s, 10 m/s, 15 m/s, and 20 m/s respectively.	
  
+ ![image](https://user-images.githubusercontent.com/57298558/229783509-a612baf7-957e-4bbb-afac-8019e6df153a.png)
+
+![image](https://user-images.githubusercontent.com/57298558/229783465-645724e9-3af1-4a11-a9f5-8cb8f8fcda3f.png)
+
+![image](https://user-images.githubusercontent.com/57298558/229783521-2babfaf8-f3da-45ef-93f1-ee0e789ac1f2.png)
+
 Figure 1: Lane Change Course
  
 **Geometric Bicycle Model**
