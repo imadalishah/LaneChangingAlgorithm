@@ -146,7 +146,7 @@ where k is a gain parameter. It is clear that the desired effect is achieved wit
 **Figure 8 :**
 **(a) velocity at 5 m/s;	(b) velocity at 10 m/s;**
 **(c) velocity at 15 m/s;	(d) velocity at 20 m/s**
-
+**CORRECTION**: Right ones are "LANE CHANGE"
 
 # **PART – III	:	CONTROLLER DESIGNING**
 
